@@ -73,10 +73,14 @@ async function main() {
       startRsvpButton.textContent = "LOGOUT";
       // Show guestbook to logged-in users
       guestbookContainer.style.display = "block";
+      // Subscribe to the guestbook collection
+      subscribeGuestbook();
     } else {
       startRsvpButton.textContent = "RSVP";
       // Hide guestbook for non-logged-in users
       guestbookContainer.style.display = "none";
+      // Unsubscribe from the guestbook collection
+      unsubscribeGuestbook();
     }
   });
 
@@ -94,10 +98,13 @@ async function main() {
     input.value = ""; 
     // Return false to avoid redirect
     return false;
-  });
+  }); 
+}
 
+// Listen to guestbook updates
+function subscribeGuestbook(){
   // Create query for messages
-  firebase.firestore().collection("guestbook")
+  guestbookListener = firebase.firestore().collection("guestbook")
     .orderBy("timestamp","desc")
     .onSnapshot((snaps) => {
       // Reset page
@@ -111,5 +118,15 @@ async function main() {
       });
     });
 }
+
+// Unsubscribe from guestbook updates
+function unsubscribeGuestbook(){
+ if (guestbookListener != null)
+ {
+   guestbookListener();
+   guestbookListener = null;
+ }
+}
+
 main();
 
