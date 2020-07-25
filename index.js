@@ -26,9 +26,18 @@ var guestbookListener = null;
 async function main() {
 
   // Add Firebase project configuration object here
-  // var firebaseConfig = {};
+  var firebaseConfig = {
+    apiKey: "AIzaSyAK11Xc0NkqWuIBYlesgjPKiFBBccOywJE",
+    authDomain: "portaltutorial-bd97e.firebaseapp.com",
+    databaseURL: "https://portaltutorial-bd97e.firebaseio.com",
+    projectId: "portaltutorial-bd97e",
+    storageBucket: "portaltutorial-bd97e.appspot.com",
+    messagingSenderId: "926201573937",
+    appId: "1:926201573937:web:d91e3189142d88b6f75b10",
+    measurementId: "G-EYSL0K6H8T"
+  };
 
-  // firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
 
   // FirebaseUI config
   const uiConfig = {
@@ -46,7 +55,7 @@ async function main() {
     }
   };
 
-  // const ui = new firebaseui.auth.AuthUI(firebase.auth());
+  const ui = new firebaseui.auth.AuthUI(firebase.auth());
 }
 main();
 
